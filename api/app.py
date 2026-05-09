@@ -5,12 +5,16 @@ import string
 import numpy as np
 import nltk
 from flask import Flask, render_template, request
+nltk.data.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../nltk_data')))
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.base import BaseEstimator, TransformerMixin
-
-nltk.data.path.append("../nltk_data")
+print("NLTK path list:", nltk.data.path)
+try:
+    print("WordNet exists at:", nltk.data.find('corpora/wordnet/lexnames'))
+except Exception as e:
+    print("WordNet lookup failed:", e)
 
 class TweetCleaner(BaseEstimator, TransformerMixin):
     def __init__(self):
@@ -157,7 +161,7 @@ class TweetCleaner(BaseEstimator, TransformerMixin):
         words = tweet.split()
         t = [self.abbreviations[w.lower()] if w.lower() in self.abbreviations.keys() else w for w in words]
         return ' '.join(t)
-app = Flask(__name__)
+app = Flask(__name__ , template_folder=os.path.join(os.path.dirname(__file__), '..', 'templates'))
 model_path = os.path.join(os.path.dirname(__file__), '../sentiment_pipeline.pkl')
 pipeline = joblib.load(model_path)
 
@@ -176,3 +180,5 @@ def home():
             
     return render_template('index.html', prediction=prediction)
 
+if __name__ == '__main__' :
+    app.run(debug=True, use_reloader=False)
