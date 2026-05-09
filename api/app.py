@@ -10,12 +10,6 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.base import BaseEstimator, TransformerMixin
-print("NLTK path list:", nltk.data.path)
-try:
-    print("WordNet exists at:", nltk.data.find('corpora/wordnet/lexnames'))
-except Exception as e:
-    print("WordNet lookup failed:", e)
-
 class TweetCleaner(BaseEstimator, TransformerMixin):
     def __init__(self):
         self.urlPattern = r"((http://)[^ ]*|(https://)[^ ]*|( www\.)[^ ]*)"
