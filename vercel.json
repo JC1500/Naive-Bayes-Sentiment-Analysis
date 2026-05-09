@@ -5,7 +5,7 @@
       "destination": "/api/app.py"
     },
     {
-      "source": "/(.*)",
+      "source": "/(?!(api|static)).*",
       "destination": "/templates/index.html"
     }
   ]
