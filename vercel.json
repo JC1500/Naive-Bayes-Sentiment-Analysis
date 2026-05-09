@@ -6,7 +6,7 @@
     },
     {
       "source": "/(?!(api|static)).*",
-      "destination": "/index.html"
+      "destination": "/templates/index.html"
     }
   ]
 }
