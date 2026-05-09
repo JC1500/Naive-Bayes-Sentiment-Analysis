@@ -10,9 +10,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.base import BaseEstimator, TransformerMixin
 
-nltk.download('stopwords', quiet=True)
-nltk.download('punkt', quiet=True)
-nltk.download('wordnet', quiet=True)
+nltk.data.path.append("../nltk_data")
+
 class TweetCleaner(BaseEstimator, TransformerMixin):
     def __init__(self):
         self.urlPattern = r"((http://)[^ ]*|(https://)[^ ]*|( www\.)[^ ]*)"
