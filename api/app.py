@@ -159,7 +159,7 @@ class TweetCleaner(BaseEstimator, TransformerMixin):
         t = [self.abbreviations[w.lower()] if w.lower() in self.abbreviations.keys() else w for w in words]
         return ' '.join(t)
 app = Flask(__name__)
-model_path = os.path.join(os.path.dirname(__file__), 'sentiment_pipeline.pkl')
+model_path = os.path.join(os.path.dirname(__file__), '../sentiment_pipeline.pkl')
 pipeline = joblib.load(model_path)
 
 @app.route('/', methods=['GET', 'POST'])
